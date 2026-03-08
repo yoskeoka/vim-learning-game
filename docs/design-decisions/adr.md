@@ -1,14 +1,21 @@
 # Architectural Decision Records (ADR)
 
-## [YYYY-MM-DD] Title of Decision
+## [2026-03-08] Locale, Language, and Timezone Strategy
 
 ### Context
-[Describe the issue or problem.]
+Vim Learning Gameはブラウザベースの教育ゲームとして、グローバルなVimユーザーを対象とする。UI言語、タイムゾーン、将来の多言語対応方針を決定する必要がある。
 
 ### Decision
-[Describe the decision made.]
+- **対応言語（初期）**: 英語・日本語
+- **デフォルト言語**: 英語（ユーザーのlocaleが未対応の場合のフォールバック）
+- **言語選択**: ユーザーのブラウザ/OSロケールから自動検出。設定で手動切り替え可能
+- **Timezone**: ユーザーのシステムlocaleに基づいて決定（サーバーサイドではUTC保存、表示時にクライアントサイドで変換）
+- **追加言語**: ゲーム完成後に検討。コミュニティ（有志）による翻訳貢献に期待
 
 ### Consequences
-[Describe the positive and negative consequences.]
+- i18nの仕組みを初期から設計に組み込む必要がある（ハードコード文字列禁止）
+- 2言語対応によりUI文言の作業量が倍になるが、教育コンテンツとしての到達範囲が大幅に広がる
+- reversi-adventureと同一方針のため、i18n設計知見を共有できる
+- 将来の言語追加は翻訳ファイルの追加のみで対応可能な設計とする
 
 ---
